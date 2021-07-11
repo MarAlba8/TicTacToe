@@ -6,19 +6,30 @@ class ViewPlayerVsCPU(ViewPlayerVsPlayer):
     def __init__(self, parent=None):
         super(ViewPlayerVsCPU, self).__init__(parent)
         self.cpu = CPU()
+        self.player = 1
 
     def button_clicked(self):
         name = self.sender().objectName()
         position = int(name.replace("button", ""))
-        self.board[position] = self.cpu.human_mark
         self.sender().setEnabled(False)
         self.sender().setText("X")
 
-        self.play_cpu()
+        status = self.play(position)
+        if status != -1:
+            self.show_winner(status)
+        else:
+            self.change_player()
+            self.play_cpu()
 
     def play_cpu(self):
         position = self.cpu.play(self.board)
         if position:
-            self.board[position] = self.cpu.cpu_mark
+            status = self.play(position)
             self.board_buttons[position].setText('O')
             self.board_buttons[position].setEnabled(False)
+            if status != -1:
+                self.show_winner(status)
+            else:
+                self.change_player()
+
+

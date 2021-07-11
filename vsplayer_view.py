@@ -15,6 +15,7 @@ class ViewPlayerVsPlayer(QWidget, TicTacToe):
         self.init_results_labels()
         self.init_board()
         self.player = 1
+        #TODO: style files
         self.setStyleSheet("QWidget {"
                            "font-size: 40px;"
                            "border-style: outset;"
@@ -22,11 +23,14 @@ class ViewPlayerVsPlayer(QWidget, TicTacToe):
                            "}")
 
     def init_results_labels(self):
-        ## TODO: change font to arial 13
         self.show_x = QLabel(self)
-        self.show_x.setGeometry(56, 420, 91, 51)
+        self.show_x.setGeometry(50, 420, 91, 51)
+        self.show_x.setStyleSheet("QWidget {"
+                                  "font-size: 20px;}")
         self.show_o = QLabel(self)
-        self.show_o.setGeometry(550, 420, 91, 51)
+        self.show_o.setGeometry(555, 420, 91, 51)
+        self.show_o.setStyleSheet("QWidget {"
+                                  "font-size: 20px;}")
 
     def init_menu_buttons(self):
         self.back_button = QPushButton(self)
@@ -73,23 +77,41 @@ class ViewPlayerVsPlayer(QWidget, TicTacToe):
         option = int(name.replace("button", ""))
 
         self.sender().setEnabled(False)
-
         if (self.player % 2) != 0:
             self.sender().setText("X")
         else:
             self.sender().setText("O")
 
-        self.play(option)
+        status = self.play(option)
+        if status != -1:
+            self.show_winner(status)
+        else:
+            self.change_player()
 
-    def paintEvent(self, event):
-        image_path = "C:/Users/Mar/Documents/Python/TicTacToe5x5/images/Table.jpg"
-        painter = QPainter(self)
-        painter.setRenderHints(QPainter.Antialiasing)
-        pixmap = QPixmap(image_path)
-        painter.drawPixmap(QRect(0, 0, 750, 575), pixmap)
+    def show_winner(self, status):
+        if status == 1:
+            if (self.player - 1) % 2 == 1:
+                self.show_o.setText("¡Ganador!")
+                self.disable_buttons()
+            else:
+                self.show_x.setText("¡Ganador!")
+                self.disable_buttons()
+        elif status == 0:
+            self.show_x.setText("¡Empate!")
+            self.show_o.setText("¡Empate!")
+            self.disable_buttons()
+
+    def change_player(self):
+        self.player = (self.player % 2) + 1
 
     def disable_buttons(self):
         for button in self.board_buttons:
             button.setEnabled(False)
 
-
+    def paintEvent(self, event):
+        #TODO: Change path
+        image_path = "C:/Users/Mar/Documents/Python/TicTacToe5x5/images/Table.jpg"
+        painter = QPainter(self)
+        painter.setRenderHints(QPainter.Antialiasing)
+        pixmap = QPixmap(image_path)
+        painter.drawPixmap(QRect(0, 0, 750, 575), pixmap)
