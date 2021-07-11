@@ -2,7 +2,7 @@ from qtpy.QtWidgets import QWidget, QPushButton, QApplication
 from qtpy.QtGui import QPainter, QPixmap
 from qtpy.QtCore import QRect
 
-from mode_view import ModeView
+from views.mode_view import ModeView
 
 
 class MainView(QWidget):
@@ -29,7 +29,7 @@ class MainView(QWidget):
         app.quit()
 
     def paintEvent(self, event):
-        image_path = "C:/Users/Mar/Documents/Python/TicTacToe5x5/images/Principal.jpg"
+        image_path = "./images/Principal.jpg"
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
         pixmap = QPixmap(image_path)

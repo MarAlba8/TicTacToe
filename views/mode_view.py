@@ -2,8 +2,8 @@ from qtpy.QtWidgets import QWidget, QPushButton, QApplication
 from qtpy.QtGui import QPainter, QPixmap
 from qtpy.QtCore import QRect
 
-from vscpu_view import ViewPlayerVsCPU
-from vsplayer_view import ViewPlayerVsPlayer
+from views.vscpu_view import ViewPlayerVsCPU
+from views.vsplayer_view import ViewPlayerVsPlayer
 
 
 class ModeView(QWidget):
@@ -51,7 +51,7 @@ class ModeView(QWidget):
         game_window.show()
 
     def paintEvent(self, event):
-        image_path = "C:/Users/Mar/Documents/Python/TicTacToe5x5/images/ModeMenu.jpg"
+        image_path = "./images/ModeMenu.jpg"
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
         pixmap = QPixmap(image_path)

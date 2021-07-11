@@ -2,7 +2,7 @@ from qtpy.QtCore import QRect
 from qtpy.QtGui import QPainter, QPixmap
 from qtpy.QtWidgets import QWidget, QPushButton, QLabel, QApplication
 
-from TicTacToe import TicTacToe
+from TicTacToe.TicTacToe import TicTacToe
 
 
 class ViewPlayerVsPlayer(QWidget, TicTacToe):
@@ -110,7 +110,7 @@ class ViewPlayerVsPlayer(QWidget, TicTacToe):
 
     def paintEvent(self, event):
         #TODO: Change path
-        image_path = "C:/Users/Mar/Documents/Python/TicTacToe5x5/images/Table.jpg"
+        image_path = "./images/Table.jpg"
         painter = QPainter(self)
         painter.setRenderHints(QPainter.Antialiasing)
         pixmap = QPixmap(image_path)

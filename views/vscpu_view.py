@@ -1,5 +1,5 @@
-from cpu import CPU
-from vsplayer_view import ViewPlayerVsPlayer
+from minimax.cpu import CPU
+from views.vsplayer_view import ViewPlayerVsPlayer
 
 
 class ViewPlayerVsCPU(ViewPlayerVsPlayer):

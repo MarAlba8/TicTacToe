@@ -1,6 +1,6 @@
 import sys
 from qtpy import QtWidgets
-from main_view import MainView
+from views.main_view import MainView
 
 app = QtWidgets.QApplication(sys.argv)
 app.main_view = MainView()
